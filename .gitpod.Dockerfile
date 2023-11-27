@@ -26,6 +26,7 @@ RUN cd /tmp && glink="https://dl.google.com/linux/direct/google-chrome-stable_cu
 	## Disables default browser prompt
 	&& t="/etc/opt/chrome/policies/managed/managed_policies.json" && mkdir -p "${t%/*}" && printf '{ "%s": %s }\n' DefaultBrowserSettingEnabled false > "$t"
 
+RUN git clone https://github.com/novnc/noVNC.git
 # For Qt WebEngine on docker
 ENV QTWEBENGINE_DISABLE_SANDBOX 1
 
