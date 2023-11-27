@@ -8,6 +8,6 @@ tasks:
     - name: wait for port open and start Firefox
       command: |
           gp ports await 5901
-          firefox-esr -profile "/workspace/ubuntuvnc/jj" --display=:1
+          firefox-esr -profile "/workspace/ubuntuvnc/jj" https://freebitco.in/?op=home# --display=:1
 
     
