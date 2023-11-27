@@ -1,4 +1,1 @@
-FROM bitnami/minideb:bullseye
-
-
-    
+FROM gitpod/workspace-firefox
