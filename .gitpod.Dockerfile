@@ -15,14 +15,8 @@ RUN install-packages \
 	
 
 
-USER gitpod
-RUN apt-get update && apt-get install -yq \
-    git \
-    git-lfs \
-    sudo \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
-
-FROM debian:stable
-RUN apt-get update
-RUN apt-get install -y \
-       firefox-esr
+ENV FF_VER 105.0
+ENV FF_DIR /dist
+RUN apt update -y && apt upgrade -y && apt install -y libgtk-3-common libasound2 libdbus-glib-1-2
+RUN mkdir -p $FF_DIR && cd $FF_DIR && wget -O - https://ftp.mozilla.org/pub/firefox/releases/$FF_VER/linux-x86_64/en-US/firefox-$FF_VER.tar.bz2 | tar -xjf -
+ENV PATH $FF_DIR/firefox:$PATH
