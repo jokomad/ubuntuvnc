@@ -3,7 +3,7 @@ image:
 
 tasks:
   - init: make
-    command: firefox-esr
+    command: firefox
 
 ports:
   - port: 5900
