@@ -11,6 +11,7 @@ USER root
 RUN install-packages \
     tigervnc-standalone-server openbox
 
+USER gitpod
 RUN cd /tmp && glink="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" \
 	&& wget -q "$glink" \
 	&& install-packages libasound2-dev libgtk-3-dev libnss3-dev \
@@ -25,6 +26,12 @@ RUN cd /tmp && glink="https://dl.google.com/linux/direct/google-chrome-stable_cu
 	&& t="$HOME/.config/google-chrome/First Run" && sudo -u gitpod mkdir -p "${t%/*}" && sudo -u gitpod touch "$t" \
 	## Disables default browser prompt
 	&& t="/etc/opt/chrome/policies/managed/managed_policies.json" && mkdir -p "${t%/*}" && printf '{ "%s": %s }\n' DefaultBrowserSettingEnabled false > "$t"
+
+ENV FF_VER 105.0
+ENV FF_DIR /dist
+RUN apt update -y && apt upgrade -y && apt install -y libgtk-3-common libasound2 libdbus-glib-1-2
+RUN mkdir -p $FF_DIR && cd $FF_DIR && wget -O - https://ftp.mozilla.org/pub/firefox/releases/$FF_VER/linux-x86_64/en-US/firefox-$FF_VER.tar.bz2 | tar -xjf -
+ENV PATH $FF_DIR/firefox:$PATH
 
 RUN git clone https://github.com/novnc/noVNC.git
 # For Qt WebEngine on docker
