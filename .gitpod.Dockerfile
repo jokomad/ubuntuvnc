@@ -4,6 +4,6 @@ RUN sudo apt-get update -q && \
     sudo apt-get install -yq openbox tigervnc-standalone-server
 FROM debian:stable
 USER gitpod
-UN sudo apt-get update -q && \
+RUN sudo apt-get update -q && \
     sudo apt-get install firefox-esr
     
