@@ -8,6 +8,6 @@ tasks:
     - name: wait for port open and start Firefox
       command: |
           gp ports await 5901
-          firefox https://freebitco.in/?op=home# --display=:1 
+          firefox-esr https://freebitco.in/?op=home# --display=:1 
 
     
