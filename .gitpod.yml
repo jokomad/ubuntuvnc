@@ -5,9 +5,9 @@ tasks:
     - name: VNC Server
       command: vncserver -SecurityTypes None -depth 16 -geometry 1024x768
 
-    - name: Start Firefox
-      command: firefox https://freebitco.in/?op=home# --display=:1      
-
-
+    - name: wait for port open and start Firefox
+      command: |
+          gp ports await 5901
+          firefox https://freebitco.in/?op=home# --display=:1 
 
     
