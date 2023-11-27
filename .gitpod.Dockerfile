@@ -1,4 +1,4 @@
-FROM amanral/ubuntu-firefox
+FROM gitpod/workspace-firefox
 
 RUN sudo apt-get update && \
-    sudo apt-get install -y openbox tigervnc-standalone-server
+    sudo apt-get install -y openbox 
