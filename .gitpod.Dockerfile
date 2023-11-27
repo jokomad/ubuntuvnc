@@ -11,10 +11,6 @@ USER root
 RUN install-packages \
 	tigervnc-standalone-server openbox
 
-
-	
-
-
 ENV FF_VER 105.0
 ENV FF_DIR /dist
 RUN apt update -y && apt upgrade -y && apt install -y libgtk-3-common libasound2 libdbus-glib-1-2
