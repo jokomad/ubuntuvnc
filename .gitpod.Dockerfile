@@ -1,46 +1,35 @@
 FROM gitpod/workspace-base
+ARG base
+FROM ${base}
+
+# Dazzle does not rebuild a layer until one of its lines are changed. Increase this counter to rebuild this layer.
+ENV TRIGGER_REBUILD=1
+
+USER root
+
+# Install Desktop-ENV, tools
+RUN install-packages \
+	tigervnc-standalone-server tigervnc-xorg-extension \
+	dbus dbus-x11 gnome-keyring xfce4 xfce4-terminal \
+	xdg-utils x11-xserver-utils pip
+
+# Install novnc and numpy module for it
+RUN git clone --depth 1 https://github.com/novnc/noVNC.git /opt/novnc \
+	&& git clone --depth 1 https://github.com/novnc/websockify /opt/novnc/utils/websockify \
+	&& find /opt/novnc -type d -name '.git' -exec rm -rf '{}' + \
+	&& sudo -H pip3 install numpy
+COPY novnc-index.html /opt/novnc/index.html
+COPY gp-vncsession /usr/bin/
+
+# Add VNC startup script
+COPY <<-"EOF" /home/gitpod/.bashrc.d/500-vnc
+export DISPLAY=:0
+test -e "$GITPOD_REPO_ROOT" && gp-vncsession
+EOF
+
+RUN chmod 0755 "$(which gp-vncsession)"
+
+# Add X11 dotfiles
+COPY --chown=gitpod:gitpod .xinitrc $HOME/
+
 USER gitpod
-RUN sudo apt-get update -q && \
-    sudo apt-get install -yq openbox tigervnc-standalone-server
-FROM alpine:3.5
-LABEL github "https://github.com/mrorgues"
-
-
-#============================#
-# Information & Requirements #
-#============================#
-# *** Run firefox-esr in a container ***
-#
-# docker run --rm -it \
-#   --net host \
-#   -v /tmp/.X11-unix:/tmp/.X11-unix \
-#   -e DISPLAY=unix$DISPLAY \
-#   --device /dev/dri \
-#   --device /dev/snd \
-#   -v /dev/shm:/dev/shm \
-#   -v /etc/fonts:/etc/fonts \
-#   -v /etc/machine-id:/etc/machine-id \
-#   -v /usr/share/fonts:/usr/share/fonts \
-#   -v $HOME/.mozilla:/root/.mozilla \
-#   --ipc="host" \
-#   --name firefox-esr \
-#   mrorgues/firefox-esr
-
-
-#=========#
-# Firefox #
-#=========#
-RUN apk update && \
-    apk upgrade && \
-    apk add \
-        ca-certificates \
-        firefox-esr \
-        libcanberra-gtk2 && \
-    rm -rf /tmp/* /var/cache/apk/*
-
-
-#=============#
-# Here we go! #
-#=============#
-ENTRYPOINT [ "/usr/bin/firefox" ]
-    
