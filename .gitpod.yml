@@ -2,8 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  
-    command: firefox
+  command: firefox
 
 ports:
   - port: 5900
