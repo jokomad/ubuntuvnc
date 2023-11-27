@@ -1,5 +1,6 @@
 image:
     file: .gitpod.dockerfile
     
-tasks:
-      command: vncserver -SecurityTypes None -depth 16 -geometry 1024x768    
+tasks:   
+    command: |
+        vncserver -SecurityTypes None -depth 16 -geometry 1024x768
