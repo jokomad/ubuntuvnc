@@ -9,9 +9,20 @@ USER root
 
 # Install Desktop-ENV, tools
 RUN install-packages \
-	tigervnc-standalone-server chromium-browser
-	
+	tigervnc-standalone-server openbox
+
+
 	
 
 
 USER gitpod
+RUN apt-get update && apt-get install -yq \
+    git \
+    git-lfs \
+    sudo \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+
+FROM debian:stable
+RUN apt-get update
+RUN apt-get install -y \
+       firefox-esr
