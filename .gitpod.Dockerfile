@@ -18,9 +18,6 @@ WORKDIR $HOME
 USER gitpod
 
 ### Install necessary packages
-RUN sudo apt-get install -yq curl g++ gcc autoconf automake bison libc6-dev \
-        libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool \
-        libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev \
-        libreadline-dev libssl-dev gnupg2 procps libpq-dev vim git firefox-esr tigervnc-standalone-server openbox python3
+RUN sudo apt-get install -yq git firefox-esr tigervnc-standalone-server openbox python3
 
 RUN git clone https://github.com/novnc/noVNC.git home/user/.novnc/
