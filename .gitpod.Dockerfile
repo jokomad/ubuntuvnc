@@ -9,9 +9,9 @@ USER root
 
 # Install Desktop-ENV, tools
 RUN install-packages \
-	tigervnc-standalone-server tigervnc-xorg-extension \
+	tigervnc-standalone-server chromium-browser
 	
 	
 
-RUN sudo add-apt-repository -y ppa:mozillateam/ppa 
+
 USER gitpod
