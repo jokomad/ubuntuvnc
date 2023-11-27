@@ -21,6 +21,6 @@ USER gitpod
 RUN sudo apt-get install -yq curl g++ gcc autoconf automake bison libc6-dev \
         libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool \
         libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev \
-        libreadline-dev libssl-dev gnupg2 procps libpq-dev vim git firefox-esr tigervnc-standalone-server openbox
+        libreadline-dev libssl-dev gnupg2 procps libpq-dev vim git firefox-esr tigervnc-standalone-server openbox python3
 
-RUN git clone https://github.com/novnc/noVNC.git
+RUN git clone https://github.com/kanaka/noVNC /home/user/.novnc/ 
