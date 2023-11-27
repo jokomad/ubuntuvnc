@@ -1,1 +1,1 @@
-FROM gitpod/workspace-firefox
+FROM gitpod/workspace-base
