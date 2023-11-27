@@ -1,8 +1,12 @@
 image:
-  file: .gitpod.dockerfile
-  context: ubuntuvnc
+  file: .gitpod.Dockerfile
 
 tasks:
-- name: Terminal
-  command: >
-    firefox-esr
+  - init: make
+    command: firefox-esr
+
+ports:
+  - port: 5900
+    onOpen: ignore
+  - port: 6080
+    onOpen: ignore
