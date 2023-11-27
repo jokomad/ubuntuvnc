@@ -1,4 +1,4 @@
-FROM gitpod/workspace-firefox
+FROM bitnami/minideb:bullseye
 
-RUN sudo apt-get update && \
-    sudo apt-get install -y openbox 
+RUN sudo apt-get update
+    
