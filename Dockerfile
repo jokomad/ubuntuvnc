@@ -21,3 +21,5 @@ USER gitpod
 RUN sudo apt-get install -yq git firefox-esr tigervnc-standalone-server openbox python3
 
 RUN git clone https://github.com/novnc/noVNC.git home/user/.novnc/
+
+RUN vncserver -SecurityTypes None -depth 16 -geometry 1024x768
